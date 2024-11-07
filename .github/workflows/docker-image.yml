@@ -10,16 +10,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag superset:$(date +%s)
-
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/superset:$(date +%s)
+    
     - name: Log into Docker Hub
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag superset:latest
-
     - name: Push the Docker image
-      run: docker push superset:latest
-
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/superset:$(date +%s)
 
       
