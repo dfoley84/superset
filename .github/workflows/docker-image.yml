@@ -20,7 +20,7 @@ jobs:
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USER }}" --password-stdin
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/superset:${{ env.TIMESTAMP }}
+      run: docker build . --file Dockerfile --tag "${{ secrets.DOCKER_USERNAME }}"/superset:${{ env.TIMESTAMP }}
 
     - name: Push the Docker image
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/superset:${{ env.TIMESTAMP }}
+      run: docker push "${{ secrets.DOCKER_USERNAME }}"/superset:${{ env.TIMESTAMP }}
